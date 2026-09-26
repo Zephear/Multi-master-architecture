@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distributed Service Ticket System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    
+    <header>
+      <h1>Service Ticket System</h1>
+      <div class="subtitle">
+        Current Node: <span class="node-badge" id="nodeId">...</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <div>
+        <div class="panel">
+          <h2>New Ticket</h2>
+          <label>Title</label>
+          <input id="title" placeholder="Enter a title for the ticket" />
+          <label>Description</label>
+          <textarea
+            id="description"
+            rows="3"
+            placeholder="Details of the issue..."
+          ></textarea>
+          <button onclick="createTicket()">Create</button>
+        </div>
+
+        <div class="panel" style="margin-top: 16px">
+          <h2>Node Status</h2>
+          <div id="peers">Loading...</div>
+          <div class="pending" id="pending"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>All Tickets</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Owner Node</th>
+              <th>Updated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ticketsBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Edit modal -->
+    <div id="editOverlay" class="overlay hidden">
+      <div class="modal">
+        <h2>Edit Ticket</h2>
+        <label>Title</label>
+        <input id="editTitle" />
+        <label>Description</label>
+        <textarea id="editDescription" rows="3"></textarea>
+        <label>Status</label>
+        <select id="editStatus">
+          <option value="Open">Open</option>
+          <option value="InProgress">In Progress</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <div class="modal-actions">
+          <button class="secondary" onclick="closeEditModal()">Cancel</button>
+          <button onclick="saveEdit()">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
