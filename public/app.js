@@ -1,5 +1,10 @@
 let MY_NODE = null;
 let editingTicketId = null;
+const OWNER_NAMES = {
+  'node-1': 'Bratislava',
+  'node-2': 'Košice',
+  'node-3': 'Žilina'
+};
 
 async function loadNodeInfo() {
   const r = await fetch('/api/node-info');
@@ -21,7 +26,7 @@ async function loadTickets() {
       <td>${escapeHtml(t.title)}</td>
       <td>${escapeHtml(t.description || '')}</td>
       <td><span class="status-pill ${t.status}">${t.status}</span></td>
-      <td class="${isMine ? 'owner-mine' : 'owner-other'}">${t.owner_node_id}${isMine ? ' (mine)' : ''}</td>
+      <td class="${isMine ? 'owner-mine' : 'owner-other'}">${escapeHtml(OWNER_NAMES[t.owner_node_id] || t.owner_node_id)}</td>
       <td>${new Date(t.updated_at).toLocaleString()}</td>
       <td>
         ${isMine
